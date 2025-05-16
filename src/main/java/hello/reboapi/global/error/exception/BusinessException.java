@@ -1,4 +1,4 @@
-package hello.reboapi.global.error.excaption;
+package hello.reboapi.global.error.exception;
 
 import hello.reboapi.global.error.ErrorResponse;
 import lombok.Getter;
