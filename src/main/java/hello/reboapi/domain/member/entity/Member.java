@@ -1,5 +1,6 @@
 package hello.reboapi.domain.member.entity;
 
+import hello.reboapi.domain.member.dto.MemberUpdateRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -42,5 +43,11 @@ public class Member {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public void update(MemberUpdateRequest dto) {
+        this.name = dto.getName();
+        this.email = dto.getEmail();
+        this.password = dto.getPassword();
     }
 }
