@@ -1,4 +1,4 @@
-package hello.reboapi.global.config;
+package hello.reboapi.global.config.kakao;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
