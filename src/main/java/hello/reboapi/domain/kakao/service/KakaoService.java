@@ -14,9 +14,7 @@ public class KakaoService {
     private final KakaoGeocodingClient kakaoGeocodingClient;
 
     @Transactional
-    public ResponseEntity<KakaoGeocodeResponse> searchKeyword(String keyword) {
-        KakaoGeocodeResponse geocodeResponse = kakaoGeocodingClient.getGeocode(keyword);
-
-        return ResponseEntity.ok(geocodeResponse);
+    public KakaoGeocodeResponse searchKeyword(String keyword) {
+        return kakaoGeocodingClient.getGeocode(keyword);
     }
 }
