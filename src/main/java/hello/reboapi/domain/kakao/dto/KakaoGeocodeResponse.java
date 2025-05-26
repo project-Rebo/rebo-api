@@ -1,12 +1,22 @@
 package hello.reboapi.domain.kakao.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Getter
-@AllArgsConstructor
 public class KakaoGeocodeResponse {
-    private String latitude;
-    private String longitude;
-    private String placeName;
+    private final Double latitude;
+    private final Double longitude;
+    private final String placeName;
+
+    public KakaoGeocodeResponse(String latitude, String longitude, String placeName) {
+        this.latitude = BigDecimal.valueOf(Double.parseDouble(latitude))
+                .setScale(6, RoundingMode.HALF_UP)
+                .doubleValue();
+        this.longitude = BigDecimal.valueOf(Double.parseDouble(longitude))
+                .setScale(6, RoundingMode.HALF_UP)
+                .doubleValue();
+        this.placeName = placeName;
+    }
 }
