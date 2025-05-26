@@ -6,7 +6,6 @@ import hello.reboapi.global.error.exception.BusinessException;
 import hello.reboapi.global.error.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.postgresql.shaded.com.ongres.stringprep.StringPrep;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -14,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import java.net.URI;
 import org.springframework.http.HttpHeaders;
@@ -28,7 +29,6 @@ public class KakaoGeocodingClient {
     private final RestTemplate restTemplate;
 
     public KakaoGeocodeResponse getGeocode(String query) {
-
         // 1. Header 구성
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", kakaoProperties.getAuthorizationHeader());
