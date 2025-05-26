@@ -2,6 +2,7 @@ package hello.reboapi.domain.kakao.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import java.util.List;
 
 @Getter
@@ -11,6 +12,7 @@ public class KakaoKeywordSearchRawResponse {
 
     @Getter
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class Document {
         private String place_name;
         private String address_name;

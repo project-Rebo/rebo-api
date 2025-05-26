@@ -27,8 +27,7 @@ public class KakaoController {
     })
     @PostMapping
     public ResponseEntity<KakaoGeocodeResponse> searchKeyword(@RequestBody String keyword) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(kakaoService.searchKeyword(keyword).getBody());
+        KakaoGeocodeResponse response = kakaoService.searchKeyword(keyword);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }
