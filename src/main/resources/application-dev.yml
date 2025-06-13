@@ -18,7 +18,18 @@ spring:
     show-sql: true
 
 kakao:
-  api-key: ${KAKAO_API_KEY}
-  admin-key: ${KAKAO_ADMIN_KEY}
-  base-url: ${BASE_URL}
+  api-key: 50cd53df1191da1df9c98c171a6ed9f8
+  admin-key: 32ce33a5a3eb4afffb05b4189311c5dd
+  base-url: https://dapi.kakao.com/v2/local
+
+deepseek:
+  api:
+    key: sk-ef2e56ce23884219b8239df9981c8dbc
+    url: https://api.deepseek.com/v1/chat/completions
+    model: deepseek-chat
+
+cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=100,expireAfterWrite=300s
 
