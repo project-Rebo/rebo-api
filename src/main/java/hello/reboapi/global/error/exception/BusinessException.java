@@ -33,4 +33,9 @@ public class BusinessException extends RuntimeException {
     this.errorCode = errorCode;
     this.errors.addAll(errors);
   }
+
+  public void satisfies(Object object) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'satisfies'");
+  }
 }

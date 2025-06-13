@@ -1,7 +1,3 @@
 spring:
   profiles:
     active: dev
-  cache:
-    type: caffeine
-    caffeine:
-      spec: maximumSize=100,expireAfterWrite=300s

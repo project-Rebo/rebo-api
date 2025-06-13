@@ -11,7 +11,6 @@ import hello.reboapi.domain.store.service.StoreService;
 import hello.reboapi.global.config.cache.dto.StoreAnalysisCache;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import jakarta.validation.Valid;
 
 @RestController

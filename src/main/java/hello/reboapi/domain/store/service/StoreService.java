@@ -26,14 +26,23 @@ public class StoreService {
 
     //상가 검색(리스트 반환)
     public List<Store> searchStore(SearchStoreRequest request) {
-        KakaoGeocodeResponse geocodeResponse = kakaoService.searchKeyword(request.getKeyword());
 
-        return storeRepository.findStoresByLocationAndCategory(
-            geocodeResponse.getLatitude(),
-            geocodeResponse.getLongitude(), 
-            request.getRadius(), 
-            request.getCategory()
-        );
+        try {
+            if(request.getKeyword() == null || request.getCategory() == null || request.getRadius() == null) {
+                throw new BusinessException(ErrorCode.INVALID_STORE_INPUT);
+            }
+
+            KakaoGeocodeResponse geocodeResponse = kakaoService.searchKeyword(request.getKeyword());
+
+            return storeRepository.findStoresByLocationAndCategory(
+                geocodeResponse.getLatitude(),
+                geocodeResponse.getLongitude(), 
+                request.getRadius(), 
+                request.getCategory()
+            );
+        } catch (Exception e) {
+            throw new BusinessException(ErrorCode.STORE_ANALYSIS_FAILED);
+        }
     }
 
     //상권 분석 서비스코드(분석 데이터만 처리)
@@ -41,8 +50,13 @@ public class StoreService {
     public StoreAnalysisCache analyzeStoreData(SearchStoreRequest request) {
 
         try {
+            if(request.getKeyword() == null || request.getCategory() == null || request.getRadius() == null) {
+                throw new BusinessException(ErrorCode.INVALID_STORE_INPUT);
+            }
+            //카카오 좌표 변환
             KakaoGeocodeResponse geocodeResponse = kakaoService.searchKeyword(request.getKeyword());
 
+            //상권 매장 조회
             List<Store> stores = storeRepository.findStoresByLocationAndCategory(
                 geocodeResponse.getLatitude(),
                 geocodeResponse.getLongitude(), 
