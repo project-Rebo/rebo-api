@@ -97,17 +97,17 @@ public class DeepSeekService {
             [결론]에 대한 내용은 상권 분석가의 종합적인 의견을 고정 300자로 포함해주세요. 종합적인 의견은 [기본정보], [종합평가], [상세분석], [전략적 제언] 섹션을 참고하여 근거를 두고 작성해주세요.
             """,
             storeAnalysisCache.getRegion(),     // 1. 지역
-            storeAnalysisCache.getCategory(),   // 2. 업종
+            storeAnalysisCache.getActiveCategory(),   // 2. 업종
             storeAnalysisCache.getRadius(),     // 3. 분석 반경
-            storeAnalysisCache.getDesity(),     // 4. 점포 밀도
+            storeAnalysisCache.getDensity(),     // 4. 점포 밀도
             storeAnalysisCache.getTotalStores(),// 5. 총 점포 수
             storeAnalysisCache.getRegion(),     // 6. 분석 지역
-            storeAnalysisCache.getCategory(),   // 7. 분석 업종
+            storeAnalysisCache.getActiveCategory(),   // 7. 분석 업종
             storeAnalysisCache.getRadius(),     // 8. 분석 반경
-            storeAnalysisCache.getDesity(),     // 9. 점포 밀도
+            storeAnalysisCache.getDensity(),     // 9. 점포 밀도
             storeAnalysisCache.getTotalStores(),// 10. 총 점포 수
             storeAnalysisCache.getTotalStores(),// 11. 총 점포 수 (상권 현황)
-            storeAnalysisCache.getDesity()      // 12. 점포 밀도 (상권 현황)
+            storeAnalysisCache.getDensity()      // 12. 점포 밀도 (상권 현황)
         );
 
         Map<String, Object> requestBody = Map.of(

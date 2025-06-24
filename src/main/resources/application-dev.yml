@@ -33,3 +33,8 @@ cache:
     caffeine:
       spec: maximumSize=100,expireAfterWrite=300s
 
+logging:
+  level:
+    hello.reboapi.domain.store.service: DEBUG
+    org.springframework.cache: DEBUG
+
