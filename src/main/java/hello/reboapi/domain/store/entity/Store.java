@@ -63,7 +63,7 @@ public class Store {
         this.name = name;
         this.categoryLarge = categoryLarge;
         this.categoryMiddle = categoryMiddle;
-        this.categorySmall = categorySmall; // 오타 수정
+        this.categorySmall = categorySmall; 
         this.roadAddress = roadAddress;
         this.latitude = latitude;
         this.longitude = longitude;
