@@ -8,6 +8,7 @@ import hello.reboapi.domain.store.service.StoreService;
 import hello.reboapi.global.config.cache.dto.StoreAnalysisCache;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import jakarta.validation.Valid;
 import hello.reboapi.domain.store.dto.CategorySearchRequest;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,18 +34,5 @@ public class StoreController {
     public ResponseEntity<StoreAnalysisCache> generateCategory(
             @Valid @RequestBody CategorySearchRequest request) {
         return ResponseEntity.ok(storeService.generateCategory(request));
-    }
-
-    @Operation(summary = "카테고리 기반 상권 분석 리포트", description = "지역, 카테고리, 반경 기준으로 AI 분석 리포트를 생성합니다")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "리포트 생성 성공"),
-        @ApiResponse(responseCode = "400", description = "잘못된 요청: 필수 파라미터 누락"),
-        @ApiResponse(responseCode = "404", description = "분석 대상 데이터 없음"),
-        @ApiResponse(responseCode = "500", description = "AI 서비스 오류")
-    })
-    @PostMapping("/category/report")
-    public ResponseEntity<String> generateCategoryReport(
-            @Valid @RequestBody CategorySearchRequest request) {
-        return ResponseEntity.ok(storeService.generateCategoryReport(request));
     }
 }

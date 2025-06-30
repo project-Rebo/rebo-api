@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;      
+import java.util.regex.Matcher; 
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +13,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import hello.reboapi.domain.deepseek.dto.AnalysisResult;
 import hello.reboapi.global.config.cache.dto.StoreAnalysisCache;
 
 @Slf4j
@@ -30,7 +33,7 @@ public class DeepSeekService {
     }
 
     // text prompt
-    public String textTransFormScript(StoreAnalysisCache storeAnalysisCache) {
+    public AnalysisResult textTransFormScript(StoreAnalysisCache storeAnalysisCache) {
 
         String prompt = String.format("""
             당신은 상권분석 전문가입니다. 아래 형식을 정확히 따라 분석 리포트를 작성해주세요.
@@ -128,6 +131,31 @@ public class DeepSeekService {
         List<Map<String, Object>> choices = (List<Map<String, Object>>) response.getBody().get("choices");
         Map<String, Object> firstChoice = choices.get(0);
         Map<String, String> message = (Map<String, String>) firstChoice.get("message");
-        return message.get("content");
+        
+        String content = message.get("content");
+        Integer score = extractScore(content);        
+        String status = extractMarketStatus(content); 
+
+        return AnalysisResult.builder()
+        .content(content)
+        .score(score)
+        .status(status)
+        .build();
+    }
+
+    private Integer extractScore(String content) {
+    // "최종 점수: 85점" 패턴 찾기
+        Pattern pattern = Pattern.compile("최종 점수:\\s*(\\d+)");
+        Matcher matcher = pattern.matcher(content);
+    
+        return matcher.find() ? Integer.parseInt(matcher.group(1)) : 50;
+    }
+
+    private String extractMarketStatus(String content) {
+    // "상권 상태: 중립" 패턴 찾기
+        Pattern pattern = Pattern.compile("상권 상태:\\s*(레드오션|중립|블루오션)");
+        Matcher matcher = pattern.matcher(content);
+
+        return matcher.find() ? matcher.group(1) : "중립";
     }
 }

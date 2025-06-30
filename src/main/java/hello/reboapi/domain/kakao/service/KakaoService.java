@@ -4,7 +4,6 @@ import hello.reboapi.domain.kakao.dto.KakaoGeocodeResponse;
 import hello.reboapi.global.config.kakao.KakaoGeocodingClient;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
