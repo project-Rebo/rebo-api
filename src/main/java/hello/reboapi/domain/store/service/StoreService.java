@@ -7,7 +7,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import hello.reboapi.domain.kakao.service.KakaoService;
 import hello.reboapi.domain.store.dto.CategorySearchRequest;
-import hello.reboapi.domain.deepseek.service.DeepSeekService;
 import hello.reboapi.domain.kakao.dto.KakaoGeocodeResponse;
 import hello.reboapi.domain.store.repository.StoreRepository;
 import hello.reboapi.global.config.cache.dto.StoreAnalysisCache;
@@ -21,7 +20,6 @@ public class StoreService {
  
     private final KakaoService kakaoService;
     private final StoreRepository storeRepository;
-    private final DeepSeekService deepSeekService;
 
     // 빈 문자열을 null로 취급하는 유틸리티 메서드
     private boolean isNullOrEmpty(String value) {
@@ -36,12 +34,14 @@ public class StoreService {
         log.info("=== 카테고리 검색 시작 ===");
         log.info("Request: {}", request);
             
+        // 요청 파라미터 검증
         if (isNullOrEmpty(request.getSearchName()) || isNullOrEmpty(request.getKeyword()) || request.getRadius() == null) {
             log.error("잘못된 요청 파라미터: searchName={}, keyword={}, radius={}", request.getSearchName(), request.getKeyword(), request.getRadius());
             
             throw new BusinessException(ErrorCode.INVALID_STORE_INPUT);
         }
     
+        // 지오코딩 결과 조회
         KakaoGeocodeResponse geocode = kakaoService.searchKeyword(request.getKeyword());
         log.info("지오코딩 결과: lat={}, lng={}", geocode.getLatitude(), geocode.getLongitude());
     
@@ -110,6 +110,7 @@ public class StoreService {
         log.info("최종 조회 결과: {}개", totalStores);
         log.info("===================");
     
+        // 조회된 매장이 0개인 경우 예외 처리
         if(totalStores == 0) {
             log.warn("조회된 매장이 0개입니다. 검색 조건을 확인해주세요.");
             throw new BusinessException(ErrorCode.STORE_LIST_EMPTY);
@@ -127,17 +128,15 @@ public class StoreService {
             .categoryLarge(request.getCategoryLarge())
             .categoryMiddle(request.getCategoryMiddle())
             .categorySmall(request.getCategorySmall())
+            .roadAddress(geocode.getRoadAddress())
+            .placeName(geocode.getPlaceName())
             .radius(request.getRadius())
             .density(density)
             .totalStores(totalStores)
+            .latitude(geocode.getLatitude())   
+            .longitude(geocode.getLongitude())  
             .build();
 
         return analysisData;     
-    }
-
-    // 5. 상권 분석 리포트 생성 (카테고리)
-    public String generateCategoryReport(CategorySearchRequest request) {
-        StoreAnalysisCache analysisData = generateCategory(request);
-        return deepSeekService.textTransFormScript(analysisData);
     }
 }

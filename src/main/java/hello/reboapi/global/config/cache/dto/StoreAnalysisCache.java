@@ -12,9 +12,13 @@ public class StoreAnalysisCache implements Serializable {
    private final String categoryLarge;
    private final String categoryMiddle;
    private final String categorySmall;
+   private final String placeName;
+   private final String roadAddress;
    private final int radius;
    private final double density;
    private final long totalStores;
+   private final Double latitude;  
+   private final Double longitude; 
    
    // 실제 사용된 카테고리를 반환하는 메서드
    public String getActiveCategory() {
