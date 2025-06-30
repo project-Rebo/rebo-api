@@ -9,8 +9,9 @@ public class KakaoGeocodeResponse {
     private final Double latitude;
     private final Double longitude;
     private final String placeName;
+    private final String roadAddress;
 
-    public KakaoGeocodeResponse(String latitude, String longitude, String placeName) {
+    public KakaoGeocodeResponse(String latitude, String longitude, String placeName, String roadAddress) {
         this.latitude = BigDecimal.valueOf(Double.parseDouble(latitude))
                 .setScale(6, RoundingMode.HALF_UP)
                 .doubleValue();
@@ -18,5 +19,6 @@ public class KakaoGeocodeResponse {
                 .setScale(6, RoundingMode.HALF_UP)
                 .doubleValue();
         this.placeName = placeName;
+        this.roadAddress = roadAddress;
     }
 }

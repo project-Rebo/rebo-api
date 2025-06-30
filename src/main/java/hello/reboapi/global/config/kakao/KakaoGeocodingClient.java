@@ -70,6 +70,6 @@ public class KakaoGeocodingClient {
             throw new BusinessException(ErrorCode.KAKAO_NOT_FOUND);
         }
 
-        return new KakaoGeocodeResponse(top.getY(), top.getX(), dong);
+        return new KakaoGeocodeResponse(top.getY(), top.getX(), top.getPlace_name(), dong);
     }
 }
