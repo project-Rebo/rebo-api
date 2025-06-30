@@ -18,7 +18,7 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MEMBER_ID")
+    @Column(name = "member_id")
     private Long id;
 
     @Column(nullable = false, updatable = true, length = 50)
@@ -35,7 +35,7 @@ public class Member {
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(name = "update_at", nullable = false)
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
     @Builder
