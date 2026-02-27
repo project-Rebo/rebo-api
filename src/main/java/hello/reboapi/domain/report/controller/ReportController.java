@@ -15,7 +15,7 @@ import hello.reboapi.domain.report.dto.ReportResponse;
 import hello.reboapi.domain.report.dto.ReportSimpleSaveRequest;
 import hello.reboapi.domain.report.entity.Report;
 import hello.reboapi.domain.report.service.ReportService;
-import hello.reboapi.domain.store.dto.CategorySearchRequest;
+import hello.reboapi.domain.search.dto.CategorySearchRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
